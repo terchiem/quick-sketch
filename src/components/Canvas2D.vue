@@ -1,6 +1,6 @@
 <template>
   <div class="Canvas2D" :style="{ width: width + 'px' }">
-    <div class="cursor" :class="{ hidden: !cursor.visible }" :style="cursorPosition"></div>
+    <img class="cursor" src="../assets/brush.png" :class="{ hidden: !cursor.visible }" :style="cursorPosition" />
     <canvas id="Canvas2D-render" :width="width" :height="height"></canvas>
   </div>
 </template>
@@ -35,8 +35,8 @@ export default {
 
     canvas.addEventListener('mousemove', (e) => {
       this.cursor.visible = true;
-      this.cursor.left = e.offsetX;
-      this.cursor.top = e.offsetY;
+      this.cursor.left = e.offsetX - 8;
+      this.cursor.top = e.offsetY - 8;
       this.context.draw(e)
     });
     canvas.addEventListener('mousedown', (e) => this.context.startDraw(e));
@@ -75,10 +75,6 @@ export default {
   pointer-events: none;
   position: absolute;
   display: block;
-  height: 6px;
-  width: 6px;
-  border-radius: 50%;
-  background-color: #000;
 }
 
 .hidden {

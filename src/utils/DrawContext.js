@@ -3,33 +3,48 @@ export default class DrawContext {
     this.drawing = false;
     this.height = canvas.height;
     this.width = canvas.width;
-    this.lastX = 0;
-    this.lastY = 0;
+    this.lastPoint = { x: 0, y: 0 };
     this.ctx = null;
     this.initialize(canvas);
   }
 
+  /** Set up canvas 2d context */
   initialize(canvas) {
     this.ctx = canvas.getContext('2d');
-    this.ctx.strokeStyle = '#000';
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
-    this.ctx.lineWidth = 6;
+    this.brush = document.querySelector('.cursor');
   }
 
+  /** Draw method to apply brush image */
   draw(e) {
     if (!this.drawing) return;
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.lastX, this.lastY);
-    this.ctx.lineTo(e.offsetX, e.offsetY);
-    this.ctx.stroke();
 
-    [ this.lastX, this.lastY ] = [ e.offsetX, e.offsetY ];
+    const currentPoint = { x: e.offsetX, y: e.offsetY };
+    const dist = this.distanceBetween(this.lastPoint, currentPoint);
+    const angle = this.angleBetween(this.lastPoint, currentPoint);
+
+    for (let i = 0; i < dist; i++) {
+      const x = this.lastPoint.x + (Math.sin(angle) * i) - 8;
+      const y = this.lastPoint.y + (Math.cos(angle) * i) - 8;
+      this.ctx.drawImage(this.brush, x, y);
+    }
+
+    this.lastPoint = currentPoint;
+  }
+
+  distanceBetween(point1, point2) {
+    return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+  }
+
+  angleBetween(point1, point2) {
+    return Math.atan2( point2.x - point1.x, point2.y - point1.y );
   }
 
   startDraw(e) {
     this.drawing = true;
-    [ this.lastX, this.lastY ] = [ e.offsetX, e.offsetY ];
+    this.lastPoint.x = e.offsetX;
+    this.lastPoint.y = e.offsetY;
   }
 
   clear() {
