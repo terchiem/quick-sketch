@@ -64,7 +64,7 @@ export default {
 }
 
 #Canvas2D-render {
-  border: 1px solid purple;
+  background-color: #fff;
 }
 
 #Canvas2D-render:hover {

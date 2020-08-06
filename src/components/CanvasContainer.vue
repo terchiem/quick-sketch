@@ -1,5 +1,5 @@
 <template>
-  <div class="CanvasContainer">
+  <div class="CanvasContainer" :style="containerSize">
     <Canvas3D :width="width" :height="height" />
     <Canvas2D :width="width" :height="height" />
   </div>
@@ -25,14 +25,28 @@ export default {
       required: true,
     },
   },
+  computed: {
+    containerSize: function() {
+      return {
+        width: this.width * 2 + 'px',
+        height: this.height + 'px'
+      }
+    }
+  }
 };
 </script>
 
 <style>
 .CanvasContainer {
+  position: relative;
+  display: flex;
   margin: 0 auto;
-  border: 1px solid red;
-  max-width: 900px;
-  width: 90%;
+  border: 1px solid #000;
+  box-sizing: content-box;
+  box-shadow: 0 2px 3px 1px rgba(0,0,0,0.2);
+}
+
+.CanvasContainer > * {
+  /* position: absolute; */
 }
 </style>

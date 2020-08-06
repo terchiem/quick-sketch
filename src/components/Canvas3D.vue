@@ -1,5 +1,5 @@
 <template>
-  <div class="Canvas3D">
+  <div class="Canvas3D" :style="{ width: width + 'px' }">
     <canvas id="Canvas3D-render" :width="width" :height="height"></canvas>
   </div>
 </template>
@@ -32,10 +32,6 @@ export default {
 
 <style>
 .Canvas3D {
-  border: 1px solid blue;
-}
-
-#Canvas3D-render {
-  border: 1px solid orange;
+  margin: auto;
 }
 </style>
