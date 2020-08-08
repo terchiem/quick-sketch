@@ -28,7 +28,7 @@ export default {
   computed: {
     containerSize: function() {
       return {
-        width: this.width * 2 + 'px',
+        width: this.width + 'px',
         height: this.height + 'px'
       }
     }
@@ -47,6 +47,6 @@ export default {
 }
 
 .CanvasContainer > * {
-  /* position: absolute; */
+  position: absolute;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="Canvas2D" :style="{ width: width + 'px' }">
-    <img class="cursor" src="../assets/brush.png" :class="{ hidden: !cursor.visible }" :style="cursorPosition" />
+    <img v-if="cursor.visible" class="cursor" src="../assets/brush.png" :style="cursorPosition" />
     <canvas id="Canvas2D-render" :width="width" :height="height"></canvas>
   </div>
 </template>
@@ -59,12 +59,12 @@ export default {
 
 <style scoped>
 .Canvas2D {
-  position: relative;
+  /* position: relative; */
   margin: auto;
 }
 
 #Canvas2D-render {
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 #Canvas2D-render:hover {
@@ -75,9 +75,5 @@ export default {
   pointer-events: none;
   position: absolute;
   display: block;
-}
-
-.hidden {
-  display: none;
 }
 </style>
