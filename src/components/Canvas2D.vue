@@ -1,12 +1,17 @@
 <template>
   <div class="Canvas2D" :style="{ width: width + 'px' }">
-    <img v-if="cursor.visible" class="cursor" src="../assets/brush.png" :style="cursorPosition" />
+    <img
+      class="cursor"
+      src="../assets/brush.png"
+      :class="{ hidden: !this.cursor.visible}"
+      :style="cursorPosition"
+    />
     <canvas id="Canvas2D-render" :width="width" :height="height"></canvas>
   </div>
 </template>
 
 <script>
-import DrawContext from '../utils/DrawContext';
+import DrawContext from "../utils/DrawContext";
 export default {
   name: "Canvas2D",
   props: {
@@ -25,36 +30,36 @@ export default {
       cursor: {
         visible: false,
         left: 0,
-        top: 0
-      }
-    }
+        top: 0,
+      },
+    };
   },
   mounted() {
-    const canvas = document.getElementById('Canvas2D-render');
+    const canvas = document.getElementById("Canvas2D-render");
     this.context = new DrawContext(canvas);
 
-    canvas.addEventListener('mousemove', (e) => {
+    canvas.addEventListener("mousemove", (e) => {
       this.cursor.visible = true;
       this.cursor.left = e.offsetX - 8;
       this.cursor.top = e.offsetY - 8;
-      this.context.draw(e)
+      this.context.draw(e);
     });
-    canvas.addEventListener('mousedown', (e) => this.context.startDraw(e));
-    canvas.addEventListener('mouseup', () => this.context.drawing = false);
-    canvas.addEventListener('mouseout', () => {
+    canvas.addEventListener("mousedown", (e) => this.context.startDraw(e));
+    canvas.addEventListener("mouseup", () => (this.context.drawing = false));
+    canvas.addEventListener("mouseout", () => {
       this.cursor.visible = false;
-      this.context.drawing = false
+      this.context.drawing = false;
     });
   },
   computed: {
-    cursorPosition: function() {
+    cursorPosition: function () {
       return {
-        top: this.cursor.top + 'px',
-        left: this.cursor.left + 'px'
+        top: this.cursor.top + "px",
+        left: this.cursor.left + "px",
       };
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -75,5 +80,9 @@ export default {
   pointer-events: none;
   position: absolute;
   display: block;
+}
+
+.hidden {
+  display: none;
 }
 </style>
