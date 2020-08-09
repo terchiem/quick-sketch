@@ -28,7 +28,9 @@ export default class CanvasRender {
     this.camera.position.z = 5;
     canvasContainer.appendChild( this.renderer.domElement );
 
-    this.addGeometry(ThreeGeometry.createRandom());
+    const geometry = ThreeGeometry.createTorus();
+    this.addGeometry(geometry);
+    // this.test();
 
     const animate = () => {
       requestAnimationFrame( animate );
@@ -48,7 +50,8 @@ export default class CanvasRender {
 
   /** Add object to scene */
   addObject(obj) {
-    this.scene.add(obj);
+    this.scene.add(obj.mesh);
+    this.scene.add(obj.lines);
     this.objects.push(obj);
   }
 
@@ -58,13 +61,23 @@ export default class CanvasRender {
     const mesh = new THREE.Mesh( geometry, material );
     const edges = new THREE.EdgesGeometry( geometry );
     const lines = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x666666 } ) );
-    this.randomRotate(mesh, lines);
-    this.addObject(mesh);
-    this.addObject(lines);
+    this.randomRotate({ mesh, lines });
+    this.addObject({ mesh, lines });
+  }
+
+  test() {
+    for (let obj of this.objects) {
+      const randomX = Math.random() * 2 - Math.random() * 2;
+      const randomY = Math.random() * 2 - Math.random() * 2;
+      obj.mesh.position.x = randomX;
+      obj.lines.position.x = randomX;
+      obj.mesh.position.y = randomY;
+      obj.lines.position.y = randomY;
+    }
   }
 
   /** Randomly rotate mesh/lines */
-  randomRotate(mesh, lines) {
+  randomRotate({ mesh, lines }) {
     const randomX = Math.random() * Math.PI;
     const randomY = Math.random() * Math.PI;
     mesh.rotation.x = randomX;
