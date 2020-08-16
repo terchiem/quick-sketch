@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header />
+    <Controls />
     <CanvasContainer :width="500" :height="500" />
   </div>
 </template>
@@ -8,12 +9,14 @@
 <script>
 import Header from "./components/Header.vue";
 import CanvasContainer from "./components/CanvasContainer.vue";
+import Controls from "./components/Controls.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     CanvasContainer,
+    Controls,
   },
 };
 </script>
