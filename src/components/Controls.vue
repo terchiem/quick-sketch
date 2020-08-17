@@ -81,9 +81,7 @@ export default {
 
 <style scoped>
 .Controls {
-  margin: 1em auto;
-  display: flex;
-  flex-direction: column;
+  margin: 0 2em;
 }
 
 .Controls-group {
@@ -95,5 +93,6 @@ export default {
 
 .Controls-row {
   display: flex;
+  flex-direction: column;
 }
 </style>

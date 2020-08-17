@@ -13,6 +13,7 @@ export default {
 <style scoped>
 .Header {
   margin: 2em;
+  grid-column: 1 / 3;
 }
 
 h1 {

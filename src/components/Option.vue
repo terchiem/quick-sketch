@@ -23,7 +23,7 @@ export default {
   place-items: center;
   top: -2px;
   position: relative;
-  margin: 0.7em;
+  margin: 0.3em auto;
   width: 8em;
   height: 2.5em;
   border-radius: 6px;
