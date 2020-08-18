@@ -1,7 +1,7 @@
 <template>
   <div class="CanvasContainer" :style="containerSize">
-    <Canvas3D :width="width" :height="height" />
-    <Canvas2D :width="width" :height="height" />
+    <Canvas3D :style="leftTranslate" :width="width" :height="height" />
+    <Canvas2D :style="rightTranslate" :width="width" :height="height" :overlay="overlay" />
   </div>
 </template>
 
@@ -24,29 +24,47 @@ export default {
       type: Number,
       required: true,
     },
+    overlay: {
+      type: Boolean,
+      required: true,
+    },
   },
   computed: {
-    containerSize: function() {
+    containerSize: function () {
       return {
-        width: this.width + 'px',
-        height: this.height + 'px'
-      }
-    }
-  }
+        width: this.width + "px",
+        height: this.height + "px",
+      };
+    },
+    leftTranslate: function () {
+      return {
+        transform: this.overlay
+          ? "translateX(0)"
+          : `translateX(${this.width / -2}px)`,
+      };
+    },
+    rightTranslate: function () {
+      return {
+        transform: this.overlay
+          ? "translateX(0)"
+          : `translateX(${this.width / 2}px)`,
+      };
+    },
+  },
 };
 </script>
 
 <style>
 .CanvasContainer {
+  box-sizing: content-box;
+  margin: 0 auto;
   position: relative;
   display: flex;
-  margin: 0 auto;
-  border: 1px solid #000;
-  box-sizing: content-box;
-  box-shadow: 0 2px 3px 1px rgba(0,0,0,0.2);
+  justify-content: center;
 }
 
 .CanvasContainer > * {
   position: absolute;
+  transition: 0.3s cubic-bezier(0.17, 0.68, 0.52, 1.06);
 }
 </style>

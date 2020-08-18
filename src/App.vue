@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <Controls />
-    <CanvasContainer :width="500" :height="500" />
+    <Controls :toggleOverlay="toggleOverlay" :overlay="overlay" />
+    <CanvasContainer :width="500" :height="500" :overlay="overlay" />
   </div>
 </template>
 
@@ -17,6 +17,16 @@ export default {
     Header,
     CanvasContainer,
     Controls,
+  },
+  data() {
+    return {
+      overlay: false,
+    };
+  },
+  methods: {
+    toggleOverlay: function () {
+      this.overlay = !this.overlay;
+    },
   },
 };
 </script>

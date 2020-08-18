@@ -24,6 +24,16 @@ import Option from "./Option";
 
 export default {
   name: "Controls",
+  props: {
+    toggleOverlay: {
+      type: Function,
+      required: true,
+    },
+    overlay: {
+      type: Boolean,
+      required: true,
+    },
+  },
   components: {
     Option,
   },
@@ -56,15 +66,11 @@ export default {
           toggled: false,
         },
       ],
-      overlay: true,
     };
   },
   methods: {
     toggleShape: function (id) {
       this.shapes[id].toggled = !this.shapes[id].toggled;
-    },
-    toggleOverlay: function () {
-      this.overlay = !this.overlay;
     },
   },
   computed: {

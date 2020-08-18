@@ -1,5 +1,5 @@
 <template>
-  <div class="Canvas2D" :style="{ width: width + 'px' }">
+  <div class="Canvas2D" :style="canvasStyle">
     <img
       class="cursor"
       src="../assets/brush.png"
@@ -21,6 +21,10 @@ export default {
     },
     width: {
       type: Number,
+      required: true,
+    },
+    overlay: {
+      type: Boolean,
       required: true,
     },
   },
@@ -58,6 +62,14 @@ export default {
         left: this.cursor.left + "px",
       };
     },
+    canvasStyle: function () {
+      return {
+        width: this.width + "px",
+        backgroundColor: this.overlay
+          ? "rgba(255,255,255,0)"
+          : "rgba(255,255,255,1)",
+      };
+    },
   },
 };
 </script>
@@ -66,10 +78,6 @@ export default {
 .Canvas2D {
   /* position: relative; */
   margin: auto;
-}
-
-#Canvas2D-render {
-  /* background-color: #fff; */
 }
 
 #Canvas2D-render:hover {
