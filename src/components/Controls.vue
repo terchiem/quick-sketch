@@ -7,8 +7,21 @@
       </div>
     </div>
     <div class="Controls-group">
-      <h3>Time</h3>
-      <div class="Controls-row">Add toggle for timed/count and number input</div>
+      <h3>Session</h3>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" name="session" id="time" class="custom-control-input" />
+        <label for="time" class="custom-control-label">Timed</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" name="session" id="set" class="custom-control-input" />
+        <label for="set" class="custom-control-label">Sets</label>
+      </div>
+      <div class="form-group row">
+        <label for="timeInput" class="col-sm-4 col-form-label">Minutes</label>
+        <div class="col-sm-8">
+          <input type="text" name="timeInput" id="timeInput" class="form-control" />
+        </div>
+      </div>
     </div>
     <div class="Controls-group">
       <h3>Overlay</h3>
