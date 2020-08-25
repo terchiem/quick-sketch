@@ -3,6 +3,7 @@
     <Header />
     <Controls :toggleOverlay="toggleOverlay" :overlay="overlay" />
     <CanvasContainer :width="500" :height="500" :overlay="overlay" />
+    <Timer :timeLimit="600" />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Header from "./components/Header.vue";
 import CanvasContainer from "./components/CanvasContainer.vue";
 import Controls from "./components/Controls.vue";
+import Timer from "./components/Timer.vue";
 
 export default {
   name: "App",
@@ -17,6 +19,7 @@ export default {
     Header,
     CanvasContainer,
     Controls,
+    Timer,
   },
   data() {
     return {
